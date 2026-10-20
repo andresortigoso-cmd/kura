@@ -4,4 +4,4 @@ Web del plan de marketing de KURA (glamping de domos en Andorra). Trabajo univer
 
 Ver en línea: https://andresortigoso-cmd.github.io/kura/
 
-Versión compilada de `04_WEB` del repo del trabajo (privado).
+Versión compilada de `04_WEB` del repo del trabajo (privado), commit 324ad73.
