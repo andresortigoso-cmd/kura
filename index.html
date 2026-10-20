@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="dark" />
+  <title>KURA · Domos de cristal para parejas bajo las estrellas, en Andorra</title>
+  <meta name="description" content="Una noche solo para vosotros dos bajo la Vía Láctea, sin pasar frío y sin organizar nada. Domos de cristal solo para adultos en Andorra, con cielo certificado Starlight." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M4 26a12 12 0 0 1 24 0' fill='none' stroke='%23d6b26e' stroke-width='2'/%3E%3Cpath d='M4 26h24' stroke='%23d6b26e' stroke-width='2'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Hanken+Grotesk:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script type="module" crossorigin src="./assets/main-B73ADWYe.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/nav-BfsqN0ce.js">
+  <link rel="stylesheet" crossorigin href="./assets/main-3iJLQiy6.css">
+</head>
+<body class="is-loading">
+  <header class="nav" id="nav">
+    <a class="nav__brand" href="./index.html" aria-label="KURA, inicio">KURA</a>
+    <button class="nav__toggle" aria-expanded="false" aria-controls="nav-links">Menú</button>
+    <ul class="nav__links" id="nav-links">
+      <li><a href="./domos.html">Domos</a></li>
+      <li><a href="./experiencias.html">Experiencias</a></li>
+      <li><a href="./nosotros.html">Nosotros</a></li>
+      <li><a class="nav__cta" href="./reservar.html">Reservar</a></li>
+    </ul>
+  </header>
+
+  <!-- Escena 3D fija -->
+  <canvas id="webgl" aria-hidden="true"></canvas>
+  <canvas id="frames" aria-hidden="true"></canvas>
+  <div class="vignette" aria-hidden="true"></div>
+  <img class="fallback" src="./img/fallback.jpg" alt="Domo de cristal iluminado sobre la nieve bajo un cielo estrellado" hidden />
+
+  <!-- Instrumento: anillo, lecturas y capítulos -->
+  <div class="hud" aria-hidden="true">
+    <svg class="hud__ring" viewBox="0 0 1000 1000">
+      <g class="hud__ticks"></g>
+      <circle class="hud__track" cx="500" cy="500" r="472" />
+      <circle class="hud__progress" cx="500" cy="500" r="472" pathLength="1" />
+      <circle class="hud__inner" cx="500" cy="500" r="440" pathLength="1" />
+    </svg>
+    <div class="hud__readout hud__readout--tl">
+      <span class="mono">Cota</span><strong data-read="cota">&gt; 1.500 m</strong>
+    </div>
+    <div class="hud__readout hud__readout--tr">
+      <span class="mono" data-read="templabel">Temp. exterior</span><strong data-read="temp">−5 °C</strong>
+    </div>
+    <div class="hud__readout hud__readout--bl">
+      <span class="mono">Escala</span><strong data-read="escala">1:2.000</strong>
+    </div>
+    <div class="hud__readout hud__readout--br">
+      <span class="mono">Recorrido</span><strong data-read="prog">00 %</strong>
+    </div>
+    <ol class="hud__rail">
+      <li data-chapter="0"><span>01</span> Plano</li>
+      <li data-chapter="1"><span>02</span> Domo</li>
+      <li data-chapter="2"><span>03</span> Materia</li>
+      <li data-chapter="3"><span>04</span> Interior</li>
+      <li data-chapter="4"><span>05</span> Cielo</li>
+    </ol>
+  </div>
+
+  <!-- Carga de las vistas renderizadas -->
+  <div class="loadbar" aria-hidden="true"><span class="loadbar__fill"></span><span class="loadbar__txt mono">Cargando vistas <b>0 %</b></span></div>
+
+  <!-- Etiquetas proyectadas desde la escena 3D (las rellena labels.js) -->
+  <div class="labels" aria-hidden="true"></div>
+
+  <main>
+    <section class="journey" id="journey" aria-label="Recorrido: del plano al interior del domo">
+      <article class="panel panel--hero" data-in="-1" data-out="0.085">
+        <p class="eyebrow">Domos de cristal para parejas · Andorra</p>
+        <h1 class="panel__title panel__title--xl">KURA</h1>
+        <p class="panel__lead">Solo vosotros dos, la Vía Láctea encima y nadie más alrededor. La noche que contaréis durante años.</p>
+        <p class="panel__note mono">Solo adultos · cielo certificado Starlight · os recogemos en Barcelona</p>
+        <p class="scroll-cue mono"><span></span>Desliza para entrar</p>
+      </article>
+
+      <article class="panel" data-in="0.12" data-out="0.30">
+        <p class="eyebrow">02 · Intimidad</p>
+        <h2 class="panel__title">Un domo entero<br />para vosotros dos.</h2>
+        <p class="panel__lead">Solo adultos, y cada domo a 30 metros del siguiente, entre pinos. Por la noche solo se oye la montaña.</p>
+        <dl class="specs">
+          <div><dt>Intimidad</dt><dd>30 m hasta el vecino</dd></div>
+          <div><dt>Silencio</dt><dd>Solo adultos</dd></div>
+          <div><dt>Calor</dt><dd>22 °C toda la noche</dd></div>
+          <div><dt>Exclusividad</dt><dd>12 domos en total</dd></div>
+        </dl>
+      </article>
+
+      <article class="panel" data-in="0.335" data-out="0.50">
+        <p class="eyebrow">03 · Sin renunciar a nada</p>
+        <h2 class="panel__title">Las estrellas,<br />sin pasar frío.</h2>
+        <p class="panel__lead">Fuera, la nieve a −5 °C. Dentro, 22 °C y una cama king calefactada. Y cuando volvéis de esquiar, el jacuzzi ya está caliente.</p>
+      </article>
+
+      <article class="panel panel--center" data-in="0.53" data-out="0.62">
+        <p class="eyebrow">Umbral</p>
+        <h2 class="panel__title">Pasad.</h2>
+      </article>
+
+      <article class="panel" data-in="0.645" data-out="0.86">
+        <p class="eyebrow">04 · El momento</p>
+        <h2 class="panel__title">Vuestra cama<br />mira al cielo.</h2>
+        <p class="panel__lead">Para el aniversario, para la pedida o para celebrar que seguís juntos. Cenáis dentro del domo a la luz de una vela, y del resto nos ocupamos nosotros.</p>
+      </article>
+
+      <article class="panel panel--mvv" data-in="0.885" data-out="9">
+        <p class="eyebrow">05 · El cielo</p>
+        <h2 class="panel__title">El único domo astro <em>solo para adultos</em> del Pirineo.</h2>
+        <div class="mvv">
+          <div>
+            <h3 class="mono">Misión</h3>
+            <p>Alojar a parejas amantes del esquí y de las estrellas en las montañas andorranas, en un ambiente privado, lujoso y ligado a una experiencia memorable.</p>
+          </div>
+          <div>
+            <h3 class="mono">Visión</h3>
+            <p>Convertir Andorra en un destino reconocido para el astroturismo y el esquí en el sector del lujo europeo.</p>
+          </div>
+          <div>
+            <h3 class="mono">Valores</h3>
+            <ul class="chips">
+              <li>Exclusividad</li><li>Privacidad</li><li>Lujo</li>
+              <li>Atención al detalle</li><li>Personalización</li><li>Orientación al cliente</li>
+            </ul>
+          </div>
+        </div>
+        <div class="panel__actions">
+          <a class="btn btn--solid" href="./reservar.html">Consultar fechas</a>
+          <a class="btn" href="#precio">Ver qué incluye la noche</a>
+        </div>
+      </article>
+    </section>
+
+    <section class="after" aria-labelledby="temporadas">
+      <div class="triptych">
+        <figure class="shot reveal">
+          <img src="./img/kura-exterior.webp" alt="Domo de cristal iluminado con su jacuzzi de cedro sobre la nieve, de noche, entre pinos" loading="lazy" width="1920" height="1080" />
+          <figcaption class="mono">El jacuzzi, bajo la nieve</figcaption>
+        </figure>
+        <figure class="shot reveal">
+          <img src="./img/kura-interior.webp" alt="Interior del domo: cama king con cabecero de terciopelo, lámparas cálidas y bosque nevado tras el cristal" loading="lazy" width="1920" height="1080" />
+          <figcaption class="mono">Dormir mirando el cielo</figcaption>
+        </figure>
+        <figure class="shot reveal">
+          <img src="./img/kura-cielo.webp" alt="La Vía Láctea vista a través de la estructura geodésica del domo" loading="lazy" width="1920" height="1080" />
+          <figcaption class="mono">La Vía Láctea, encima</figcaption>
+        </figure>
+      </div>
+
+      <header class="after__head">
+        <p class="eyebrow">Dos temporadas, un mismo cielo</p>
+        <h2 id="temporadas" class="after__title">Nieve en invierno.<br />Estrellas todo el año.</h2>
+      </header>
+      <div class="seasons">
+        <article class="season reveal">
+          <img class="season__img" src="./img/kura-invierno.webp" alt="" loading="lazy" width="1280" height="720" />
+          <p class="mono">Diciembre — marzo</p>
+          <h3>Nieve + estrellas</h3>
+          <p>Esquiáis sin colas, con forfait VIP en Grandvalira y traslado a pistas. Al volver, el jacuzzi ya está caliente y la noche entera es para mirar arriba.</p>
+        </article>
+        <article class="season reveal">
+          <img class="season__img" src="./img/kura-verano.webp" alt="" loading="lazy" width="1280" height="720" />
+          <p class="mono">Junio — septiembre</p>
+          <h3>La noche de las Perseidas</h3>
+          <p>En agosto el cielo se llena de estrellas fugaces. Un astrónomo os guía con el telescopio y os lleváis la foto del cielo que nadie más tiene.</p>
+        </article>
+      </div>
+
+      <section class="plan" aria-labelledby="plan-t">
+        <header class="after__head">
+          <p class="eyebrow">Así de fácil</p>
+          <h2 id="plan-t" class="after__title">Vosotros elegís la fecha.<br />Nosotros, todo lo demás.</h2>
+        </header>
+        <ol class="steps">
+          <li class="reveal"><span class="mono">01</span><h3>Elegid la fecha y lo que celebráis</h3><p>Un aniversario, una pedida o dos noches de esquí y estrellas. Lo preparamos a vuestra medida.</p></li>
+          <li class="reveal"><span class="mono">02</span><h3>Os recogemos</h3><p>Un chófer os espera en Barcelona o Toulouse. En menos de 3 horas estáis en el domo.</p></li>
+          <li class="reveal"><span class="mono">03</span><h3>La noche es vuestra</h3><p>Cena, jacuzzi, astrónomo y concierge a cualquier hora. Vosotros solo tenéis que mirar arriba.</p></li>
+        </ol>
+      </section>
+
+      <section class="price" id="precio" aria-labelledby="precio-t">
+        <header class="after__head">
+          <p class="eyebrow">La noche en KURA</p>
+          <h2 id="precio-t" class="after__title">900 € la noche, para dos.</h2>
+          <p class="after__lead">En invierno y en fechas señaladas. En primavera, en otoño y entre semana en verano, de 550 a 750 €.</p>
+        </header>
+        <div class="price__grid">
+          <div class="price__includes reveal">
+            <p class="mono">Incluido en cada noche</p>
+            <ul>
+              <li>Un domo de cristal solo para vosotros, a 22 °C</li>
+              <li>Vuestro jacuzzi privado bajo las estrellas</li>
+              <li>Un astrónomo para enseñaros el cielo</li>
+              <li>Chófer desde Barcelona o Toulouse, ida y vuelta</li>
+            </ul>
+            <p class="price__aside">La cena con chef, el forfait y los packs se reservan aparte.</p>
+          </div>
+          <ul class="packs">
+            <li class="reveal"><span class="mono">Invierno</span><h3>Nieve + estrellas</h3><p>Para esquiar sin colas de día y mirar arriba de noche: dos noches con forfait VIP en Grandvalira.</p></li>
+            <li class="reveal"><span class="mono">Todo el año</span><h3>Pedida o aniversario</h3><p>Para que el momento salga perfecto: cena con chef en el domo, pack romántico y un fotógrafo que lo guarda.</p></li>
+            <li class="reveal"><span class="mono">Agosto</span><h3>Perseidas</h3><p>Para ver caer estrellas con un astrónomo al lado y llevaros la foto del cielo.</p></li>
+          </ul>
+        </div>
+        <p class="price__cta"><a class="btn btn--solid" href="./reservar.html">Consultar fechas</a></p>
+      </section>
+
+      <header class="after__head">
+        <p class="eyebrow">Sin letra pequeña</p>
+        <h2 class="after__title">Lo que nos preguntáis antes de reservar.</h2>
+      </header>
+      <ul class="promises">
+        <li><span class="mono">Noche nublada</span><p>Si el cielo no se abre, os cambiamos la noche por otra fecha o por otra experiencia.</p></li>
+        <li><span class="mono">Cancelación flexible</span><p>Si vuestros planes cambian, movemos la fecha sin penalizaciones sorpresa.</p></li>
+        <li><span class="mono">Traslado incluido</span><p>Os recogemos en Barcelona o Toulouse y os dejamos en la puerta del domo. No tenéis que conducir.</p></li>
+        <li><span class="mono">Pack de dos noches</span><p>Una noche para el esquí o la ruta, otra solo para el cielo.</p></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div>
+      <p class="footer__brand">KURA</p>
+      <p>Domos de cristal solo para adultos en la alta montaña de Andorra.</p>
+    </div>
+    <ul>
+      <li><a href="./domos.html">Domos</a></li>
+      <li><a href="./experiencias.html">Experiencias</a></li>
+      <li><a href="./nosotros.html">Nosotros</a></li>
+      <li><a href="./reservar.html">Reservar</a></li>
+    </ul>
+    <ul>
+      <li>Pirineo de Andorra</li>
+      <li>Apertura prevista: diciembre de 2027</li>
+      <li><a href="./reservar.html">¿Agencia de viajes? Pedid la ficha técnica y las tarifas netas</a></li>
+    </ul>
+    <p class="footer__legal">Proyecto académico de Marketing · Carmen Villalonga, Andrés Ortigoso y Elena Rossell. KURA es un concepto en desarrollo; no se aceptan reservas reales.<br />Imágenes generadas en 3D. Vía Láctea: ESO/S. Brunier (CC BY 4.0). Mobiliario y texturas: Poly Haven (CC0).</p>
+  </footer>
+
+</body>
+</html>
